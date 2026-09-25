@@ -1,0 +1,16 @@
+{
+  "app.name": "HERMES",
+  "nav.chat": "گفتگو",
+  "nav.agent": "عامل هوش مصنوعی",
+  "nav.character": "شخصیت",
+  "nav.voice": "صدا",
+  "nav.settings": "تنظیمات",
+  "settings.language": "زبان",
+  "language.english": "English",
+  "language.japanese": "日本語",
+  "language.persian": "فارسی",
+  "action.save": "ذخیره",
+  "action.cancel": "لغو",
+  "action.stop": "توقف",
+  "action.preview": "پیش‌نمایش"
+}

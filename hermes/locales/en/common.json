@@ -1,0 +1,16 @@
+{
+  "app.name": "HERMES",
+  "nav.chat": "Chat",
+  "nav.agent": "Agent",
+  "nav.character": "Character",
+  "nav.voice": "Voice",
+  "nav.settings": "Settings",
+  "settings.language": "Language",
+  "language.english": "English",
+  "language.japanese": "日本語",
+  "language.persian": "فارسی",
+  "action.save": "Save",
+  "action.cancel": "Cancel",
+  "action.stop": "Stop",
+  "action.preview": "Preview"
+}
