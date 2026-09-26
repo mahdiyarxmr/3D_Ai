@@ -1,0 +1,69 @@
+{
+  "title": "設定",
+  "sections": {
+    "general": "一般",
+    "character": "キャラクター",
+    "voice": "ボイス",
+    "agent": "エージェント",
+    "ai": "AI プロバイダー",
+    "privacy": "プライバシー",
+    "joyai": "JoyAI",
+    "advanced": "詳細設定"
+  },
+  "general": {
+    "uiLanguage": "表示言語",
+    "startOnLogin": "サインイン時に起動する",
+    "minimiseToTray": "タスクトレイに最小化する",
+    "alwaysOnTop": "コンパニオンを常に最前面に表示",
+    "theme": "テーマ",
+    "themeDark": "ダーク",
+    "themeLight": "ライト"
+  },
+  "agent": {
+    "permissionLevel": "権限レベル",
+    "toolAllowlist": "許可するツール",
+    "toolAllowlistHint": "空にすると、そのレベルで許されるすべてを使用できます。",
+    "toolDenylist": "禁止するツール",
+    "toolDenylistHint": "許可リストより常に優先されます。",
+    "filesystemScopes": "ファイル操作の範囲",
+    "filesystemScopesHint": "ファイル系ツールはこのフォルダー内だけを操作できます。空の場合は操作できません。",
+    "addScope": "フォルダーを追加",
+    "confirmationTimeout": "確認の待ち時間",
+    "maxIterations": "1 回あたりの最大ステップ数"
+  },
+  "ai": {
+    "llmProvider": "言語モデル",
+    "visionProvider": "画像認識モデル",
+    "sttProvider": "音声認識",
+    "ttsProvider": "音声合成",
+    "credentialRef": "資格情報",
+    "credentialHint": "キーは Windows 資格情報マネージャーに保存され、この設定ファイルには書き込まれません。",
+    "providerMock": "モック（オフライン）",
+    "providerLocal": "ローカルモデル",
+    "providerOpenAI": "OpenAI"
+  },
+  "privacy": {
+    "allowCloudLlm": "クラウドの言語モデルを許可する",
+    "allowCloudVision": "スクリーンショットの外部送信を許可する",
+    "allowCloudAudio": "音声の外部送信を許可する",
+    "retainAuditLog": "操作ログの保存期間",
+    "days": "{{count}} 日間",
+    "telemetry": "利用状況の送信",
+    "telemetryOff": "利用状況の送信は常に無効です。",
+    "localBadge": "この PC 内で処理",
+    "cloudBadge": "{{provider}} に送信"
+  },
+  "joyai": {
+    "enabled": "JoyAI の映像機能を有効にする",
+    "optional": "JoyAI は任意です。なくても HERMES は完全に動作します。",
+    "endpoint": "JoyAI サービスのアドレス",
+    "status": "サービスの状態",
+    "notInstalled": "未インストール"
+  },
+  "advanced": {
+    "developerMode": "開発者モード",
+    "serviceStatus": "サービスの状態",
+    "openStorage": "保存フォルダーを開く",
+    "diagnostics": "診断情報"
+  }
+}

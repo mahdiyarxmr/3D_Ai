@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Build output
+dist/
+dist-types/
+build/
+*.tsbuildinfo
+hermes/apps/desktop/src-tauri/target/
+hermes/apps/desktop/src-tauri/gen/
+
+# Local runtime state — never commit a user's data
+hermes/storage/characters/*/
+hermes/storage/logs/*
+hermes/storage/memory/*
+hermes/storage/settings/*
+!hermes/storage/**/.gitkeep
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Secrets. Belt and braces: HERMES never writes keys here, but make it hard.
+.env
+.env.*
+!.env.example
+session.json
+*.pem
+*.key
+
+# Assets that do not belong in git
+*.vrm
+
+# Tooling
+coverage/
+.vitest/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

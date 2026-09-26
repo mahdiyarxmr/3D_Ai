@@ -1,0 +1,69 @@
+{
+  "title": "تنظیمات",
+  "sections": {
+    "general": "عمومی",
+    "character": "شخصیت",
+    "voice": "صدا",
+    "agent": "عامل",
+    "ai": "ارائه‌دهندگان هوش مصنوعی",
+    "privacy": "حریم خصوصی",
+    "joyai": "JoyAI",
+    "advanced": "پیشرفته"
+  },
+  "general": {
+    "uiLanguage": "زبان رابط کاربری",
+    "startOnLogin": "اجرا هنگام ورود به ویندوز",
+    "minimiseToTray": "کوچک شدن به سینی سیستم",
+    "alwaysOnTop": "همیار همیشه روی پنجره‌های دیگر",
+    "theme": "پوسته",
+    "themeDark": "تیره",
+    "themeLight": "روشن"
+  },
+  "agent": {
+    "permissionLevel": "سطح دسترسی",
+    "toolAllowlist": "ابزارهای مجاز",
+    "toolAllowlistHint": "خالی بگذارید تا هر چه سطح دسترسی اجازه می‌دهد مجاز باشد.",
+    "toolDenylist": "ابزارهای مسدود",
+    "toolDenylistHint": "همیشه بر فهرست مجاز اولویت دارد.",
+    "filesystemScopes": "محدوده دسترسی به فایل‌ها",
+    "filesystemScopesHint": "ابزارهای فایل فقط به این پوشه‌ها دسترسی دارند. خالی یعنی هیچ دسترسی.",
+    "addScope": "افزودن پوشه",
+    "confirmationTimeout": "مهلت پاسخ به درخواست تأیید",
+    "maxIterations": "بیشترین گام در هر اجرا"
+  },
+  "ai": {
+    "llmProvider": "مدل زبانی",
+    "visionProvider": "مدل بینایی",
+    "sttProvider": "تبدیل گفتار به متن",
+    "ttsProvider": "تبدیل متن به گفتار",
+    "credentialRef": "اطلاعات ورود",
+    "credentialHint": "کلیدها در Credential Manager ویندوز ذخیره می‌شوند، نه در این فایل.",
+    "providerMock": "آزمایشی (آفلاین)",
+    "providerLocal": "مدل محلی",
+    "providerOpenAI": "OpenAI"
+  },
+  "privacy": {
+    "allowCloudLlm": "اجازه استفاده از مدل‌های زبانی ابری",
+    "allowCloudVision": "اجازه خروج تصاویر صفحه از این رایانه",
+    "allowCloudAudio": "اجازه خروج صدا از این رایانه",
+    "retainAuditLog": "نگهداری گزارش فعالیت به مدت",
+    "days": "{{count}} روز",
+    "telemetry": "ارسال آمار استفاده",
+    "telemetryOff": "ارسال آمار استفاده به‌طور دائم غیرفعال است.",
+    "localBadge": "روی همین رایانه",
+    "cloudBadge": "ارسال به {{provider}}"
+  },
+  "joyai": {
+    "enabled": "فعال کردن قابلیت‌های ویدیویی JoyAI",
+    "optional": "JoyAI اختیاری است. HERMES بدون آن هم کامل کار می‌کند.",
+    "endpoint": "نشانی سرویس JoyAI",
+    "status": "وضعیت سرویس",
+    "notInstalled": "نصب نشده"
+  },
+  "advanced": {
+    "developerMode": "حالت توسعه‌دهنده",
+    "serviceStatus": "وضعیت سرویس‌ها",
+    "openStorage": "باز کردن پوشه ذخیره‌سازی",
+    "diagnostics": "اطلاعات عیب‌یابی"
+  }
+}

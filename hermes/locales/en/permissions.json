@@ -1,0 +1,75 @@
+{
+  "title": "Permissions",
+  "levels": {
+    "OBSERVE": "Observe",
+    "ASSIST": "Assist",
+    "AUTONOMOUS": "Autonomous"
+  },
+  "levelDescriptions": {
+    "OBSERVE": "Can look but not touch: screenshots, window and system information, and reading files inside the folders you allow.",
+    "ASSIST": "Can control the mouse and keyboard, open applications, run commands and change files. Risky actions ask first.",
+    "AUTONOMOUS": "Runs approved tools without asking each time. Destructive and security-related actions still require confirmation."
+  },
+  "risk": {
+    "SAFE": "Safe",
+    "LOW": "Low",
+    "MEDIUM": "Medium",
+    "HIGH": "High",
+    "CRITICAL": "Critical"
+  },
+  "request": {
+    "title": "Permission required",
+    "body": "{{name}} wants to run {{tool}}.",
+    "riskLabel": "Risk",
+    "reasonLabel": "Why this needs approval",
+    "argsLabel": "Details",
+    "approveOnce": "Approve once",
+    "deny": "Deny",
+    "timeout": "This request expired without an answer.",
+    "countdown": "Expires in {{seconds}}s"
+  },
+  "reasons": {
+    "unknown_tool": "That tool does not exist.",
+    "invalid_args": "The request did not match the tool's expected arguments.",
+    "level_forbids_capability": "The current permission level does not allow this kind of action.",
+    "denylisted": "This tool is on your blocked list.",
+    "not_allowlisted": "This tool is not on your allowed list.",
+    "outside_filesystem_scope": "That path is outside the folders you allowed.",
+    "high_risk_requires_confirmation": "This action is riskier than the current level approves automatically.",
+    "always_confirm": "This kind of action always needs your approval.",
+    "emergency_stop": "Emergency stop is engaged.",
+    "blocked_category": "This action is permanently blocked.",
+    "user_declined": "You declined this request."
+  },
+  "categories": {
+    "destructive.delete": "Deleting data",
+    "destructive.disk": "Destructive disk operation",
+    "security.config": "Security configuration change",
+    "security.firewall": "Firewall change",
+    "security.accounts": "User account change",
+    "security.antivirus": "Disabling security software",
+    "system.config": "System configuration change",
+    "system.boot": "Boot configuration change",
+    "system.power": "Shutting down or restarting",
+    "persistence": "Creating something that runs automatically",
+    "credentials": "Access to passwords or keys",
+    "remote.code": "Running code downloaded from the internet",
+    "process.force_kill": "Forcefully ending a program"
+  },
+  "capabilities": {
+    "observe": "Observing the screen and system",
+    "input": "Mouse and keyboard control",
+    "fs.read": "Reading files",
+    "fs.write": "Changing files",
+    "fs.delete": "Deleting files",
+    "process": "Starting and stopping applications",
+    "shell": "Running shell commands",
+    "network": "Network access"
+  },
+  "scopes": {
+    "title": "Folders the agent may use",
+    "empty": "No folders allowed yet. File tools are disabled.",
+    "add": "Allow a folder",
+    "remove": "Remove"
+  }
+}
