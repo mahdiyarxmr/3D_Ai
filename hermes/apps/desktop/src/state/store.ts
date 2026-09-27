@@ -244,13 +244,31 @@ export const useHermes = create<HermesState>((set, get) => {
     statusText: 'idle',
 
     async init() {
-      const [settings, characters] = await Promise.all([storage.loadSettings(), storage.listCharacters()]);
-      const active =
-        characters.find((c) => c.id === settings.character.activeCharacterId) ??
-        characters[0] ??
-        defaultCharacter({ name: 'HERMES' });
-      set({ ready: true, settings, characters, activeCharacter: active });
-      await get().refreshAudit();
+      // Never let a storage failure leave the UI stuck on the boot screen.
+      // `ready` gates the entire shell, so anything thrown here used to render
+      // as a permanently blank window with the cause swallowed by `void init()`.
+      try {
+        const [settings, characters] = await Promise.all([storage.loadSettings(), storage.listCharacters()]);
+        const active =
+          characters.find((c) => c.id === settings.character.activeCharacterId) ??
+          characters[0] ??
+          defaultCharacter({ name: 'HERMES' });
+        set({ ready: true, settings, characters, activeCharacter: active });
+      } catch (error) {
+        console.error('[hermes] init failed; starting with defaults', error);
+        set({
+          ready: true,
+          settings: defaultSettings(),
+          characters: [],
+          activeCharacter: defaultCharacter({ name: 'HERMES' }),
+          statusText: 'error',
+        });
+      }
+      try {
+        await get().refreshAudit();
+      } catch (error) {
+        console.error('[hermes] audit load failed', error);
+      }
     },
 
     setMode(mode) {

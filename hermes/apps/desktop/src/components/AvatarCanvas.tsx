@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { VrmStage } from '@hermes/vrm';
 import { useHermes } from '../state/store.js';
 import { storage } from '../runtime/storage.js';
@@ -13,12 +13,23 @@ export function AvatarCanvas({ interactive = true, className }: { interactive?: 
   const character = useHermes((s) => s.activeCharacter);
   const emotion = useHermes((s) => s.emotion);
   const setVrmLoaded = useHermes((s) => s.setVrmLoaded);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    const stage = new VrmStage({ canvas: canvasRef.current, transparent: true });
+    // WebGL is unavailable on some VMs, over remote desktop, and under GPU
+    // driver blocklists. Losing the avatar is acceptable; losing the entire
+    // application because a renderer could not be constructed is not.
+    let stage: VrmStage;
+    try {
+      stage = new VrmStage({ canvas: canvasRef.current, transparent: true });
+      stage.start();
+    } catch (error) {
+      console.error('[hermes] WebGL unavailable; avatar disabled', error);
+      setWebglFailed(true);
+      return;
+    }
     stageRef.current = stage;
-    stage.start();
     return () => {
       stage.dispose();
       stageRef.current = null;
@@ -65,6 +76,14 @@ export function AvatarCanvas({ interactive = true, className }: { interactive?: 
     window.addEventListener('pointermove', onMove);
     return () => window.removeEventListener('pointermove', onMove);
   }, [interactive]);
+
+  if (webglFailed) {
+    return (
+      <div className={`${className ?? 'avatar-canvas'} avatar-fallback`} role="img" aria-label={character.name}>
+        <span>{character.name.slice(0, 1).toUpperCase()}</span>
+      </div>
+    );
+  }
 
   return <canvas ref={canvasRef} className={className ?? 'avatar-canvas'} aria-hidden="true" />;
 }

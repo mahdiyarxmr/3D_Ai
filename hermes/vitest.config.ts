@@ -9,7 +9,8 @@ export default defineConfig({
     include: ['tests/**/*.test.{ts,tsx}', 'packages/**/*.test.{ts,tsx}'],
     environment: 'node',
     // Only the component tests need a DOM; everything else stays on Node.
-    environmentMatchGlobs: [['tests/ui.test.tsx', 'jsdom']],
+    environmentMatchGlobs: [['tests/ui.test.tsx', 'jsdom'],
+      ['tests/boot.test.tsx', 'jsdom']],
   },
   resolve: {
     alias: {

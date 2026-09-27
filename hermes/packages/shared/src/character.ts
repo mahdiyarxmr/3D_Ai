@@ -102,8 +102,16 @@ export type Emotion = z.infer<typeof EmotionSchema>;
 export const CharacterSchema = z.object({
   id: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,63}$/, 'id must be lowercase slug'),
   name: z.string().min(1).max(64),
-  /** Path relative to the storage root. Never an absolute path from the UI. */
-  vrm: z.string().min(1),
+  /**
+   * Path relative to the storage root. Never an absolute path from the UI.
+   *
+   * Empty string means "no model imported yet", which is a legitimate state:
+   * a fresh install has a character but no .vrm until the user imports one,
+   * and the stage renders the procedural fallback rig meanwhile. This was
+   * previously `.min(1)`, which made `defaultCharacter()` throw during module
+   * evaluation and left the whole app as a blank white page.
+   */
+  vrm: z.string().default(''),
   personality: PersonalitySchema.default({}),
   voice: VoiceParamsSchema.default({}),
   languages: z.array(SupportedLanguageSchema).min(1).default(['en']),

@@ -19,7 +19,9 @@ export function ChatPanel() {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Guarded: not implemented in every embedded webview / test environment,
+    // and an autoscroll must never be able to take down the chat panel.
+    endRef.current?.scrollIntoView?.({ behavior: 'smooth' });
   }, [messages.length]);
 
   const visible = messages.filter((m) => developerMode || m.role !== 'system');
