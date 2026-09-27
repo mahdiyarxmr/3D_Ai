@@ -1,16 +1,178 @@
 {
-  "app.name": "HERMES",
-  "nav.chat": "گفتگو",
-  "nav.agent": "عامل هوش مصنوعی",
-  "nav.character": "شخصیت",
-  "nav.voice": "صدا",
-  "nav.settings": "تنظیمات",
-  "settings.language": "زبان",
-  "language.english": "English",
-  "language.japanese": "日本語",
-  "language.persian": "فارسی",
-  "action.save": "ذخیره",
-  "action.cancel": "لغو",
-  "action.stop": "توقف",
-  "action.preview": "پیش‌نمایش"
+  "app": {
+    "name": "HERMES",
+    "tagline": "همیار رومیزی با پردازش محلی"
+  },
+  "nav": {
+    "chat": "گفتگو",
+    "agent": "عامل",
+    "character": "شخصیت",
+    "voice": "صدا",
+    "settings": "تنظیمات",
+    "audit": "گزارش فعالیت"
+  },
+  "mode": {
+    "companion": "حالت همیار",
+    "expanded": "حالت گسترده",
+    "toCompanion": "کوچک کردن به حالت همیار",
+    "toExpanded": "باز کردن پنجره کامل"
+  },
+  "action": {
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "stop": "توقف",
+    "preview": "پیش‌نمایش",
+    "close": "بستن",
+    "send": "ارسال",
+    "import": "وارد کردن",
+    "remove": "حذف",
+    "reset": "بازنشانی",
+    "approve": "تأیید",
+    "deny": "رد",
+    "retry": "تلاش دوباره",
+    "clear": "پاک کردن"
+  },
+  "status": {
+    "idle": "آماده",
+    "listening": "در حال شنیدن",
+    "thinking": "در حال فکر کردن",
+    "speaking": "در حال صحبت",
+    "working": "در حال اجرا",
+    "stopped": "متوقف شد",
+    "error": "خطا",
+    "connected": "متصل",
+    "disconnected": "آفلاین"
+  },
+  "emergency": {
+    "stop": "توقف اضطراری",
+    "stopShort": "توقف",
+    "engaged": "توقف اضطراری فعال است. اجرای همه ابزارها متوقف شد.",
+    "release": "آزادسازی توقف",
+    "hint": "ابزار در حال اجرا را لغو می‌کند و از اجرای جدید جلوگیری می‌کند"
+  },
+  "chat": {
+    "title": "گفتگو",
+    "placeholder": "پیام به {{name}}…",
+    "empty": "هنوز پیامی نیست. سلام کنید.",
+    "you": "شما",
+    "thinking": "{{name}} در حال فکر کردن است…",
+    "conversationLanguage": "زبان گفتگو",
+    "micStart": "شروع ورودی صوتی",
+    "micStop": "توقف ورودی صوتی"
+  },
+  "agent": {
+    "title": "عامل",
+    "activity": "فعالیت ابزارها",
+    "noActivity": "هنوز ابزاری اجرا نشده است.",
+    "level": "سطح دسترسی",
+    "run": "اجرا",
+    "iterations": "گام {{current}} از {{max}}",
+    "provider": "ارائه‌دهنده",
+    "mockNotice": "در حال اجرا با ارائه‌دهنده آزمایشی. از تنظیمات ← هوش مصنوعی یک مدل واقعی وصل کنید.",
+    "verifying": "در حال بررسی نتیجه…"
+  },
+  "tools": {
+    "computer": {
+      "screenshot": "گرفتن تصویر از صفحه",
+      "mouse_move": "حرکت دادن ماوس",
+      "mouse_click": "کلیک ماوس",
+      "mouse_scroll": "پیمایش",
+      "keyboard_type": "تایپ کردن متن",
+      "keyboard_press": "فشردن یک کلید",
+      "hotkey": "فشردن ترکیب کلیدها"
+    },
+    "filesystem": {
+      "list": "فهرست کردن یک پوشه",
+      "read": "خواندن یک فایل",
+      "write": "نوشتن یک فایل",
+      "copy": "کپی کردن فایل",
+      "move": "جابه‌جا کردن فایل",
+      "delete": "حذف کردن فایل"
+    },
+    "applications": {
+      "open": "باز کردن یک برنامه",
+      "close": "بستن یک پنجره",
+      "focus": "آوردن پنجره به جلو",
+      "list_windows": "فهرست پنجره‌های باز"
+    },
+    "shell": {
+      "cmd": "اجرای فرمان CMD",
+      "powershell": "اجرای اسکریپت PowerShell"
+    },
+    "system": {
+      "info": "خواندن اطلاعات سیستم",
+      "processes": "فهرست پردازش‌ها"
+    }
+  },
+  "character": {
+    "title": "شخصیت",
+    "active": "شخصیت فعال",
+    "import": "وارد کردن فایل ‎.vrm‎",
+    "importing": "در حال بارگذاری مدل…",
+    "imported": "{{name}} بارگذاری شد",
+    "none": "هنوز شخصیتی وارد نشده است",
+    "fallbackNotice": "مدل داخلی نمایش داده می‌شود. برای استفاده از مدل خودتان یک فایل ‎.vrm‎ وارد کنید.",
+    "replace": "تعویض مدل",
+    "scale": "اندازه",
+    "offsetX": "جابه‌جایی افقی",
+    "offsetY": "جابه‌جایی عمودی",
+    "author": "سازنده",
+    "license": "پروانه",
+    "errors": {
+      "too_small": "این فایل برای یک VRM بسیار کوچک است.",
+      "too_large": "حجم فایل از محدودیت ۲۰۰ مگابایت بیشتر است.",
+      "not_glb": "این یک فایل باینری glTF نیست.",
+      "unsupported_version": "نسخه glTF پشتیبانی نمی‌شود.",
+      "length_mismatch": "به نظر می‌رسد فایل ناقص یا خراب است.",
+      "no_json_chunk": "بخش JSON فایل glTF یافت نشد.",
+      "bad_json": "داده‌های مدل خوانده نشد.",
+      "not_vrm": "این فایل glTF افزونه VRM ندارد."
+    }
+  },
+  "idle": {
+    "title": "انیمیشن حالت آماده",
+    "breathRate": "سرعت تنفس",
+    "breathDepth": "عمق تنفس",
+    "sway": "تاب خوردن بدن",
+    "headFollow": "حرکت سر",
+    "blink": "پلک زدن",
+    "saccade": "حرکت چشم",
+    "intensity": "شدت کلی"
+  },
+  "language": {
+    "label": "زبان",
+    "english": "English",
+    "japanese": "日本語",
+    "persian": "فارسی",
+    "ui": "زبان رابط کاربری",
+    "conversation": "زبان گفتگو",
+    "independentHint": "زبان رابط کاربری و زبانی که عامل با آن صحبت می‌کند از هم جدا هستند."
+  },
+  "tray": {
+    "show": "نمایش HERMES",
+    "companion": "حالت همیار",
+    "expanded": "حالت گسترده",
+    "emergencyStop": "توقف اضطراری",
+    "quit": "خروج"
+  },
+  "audit": {
+    "title": "گزارش فعالیت",
+    "empty": "هنوز چیزی ثبت نشده است.",
+    "time": "زمان",
+    "tool": "ابزار",
+    "risk": "خطر",
+    "outcome": "نتیجه",
+    "outcomes": {
+      "allow": "مجاز",
+      "confirm": "درخواست تأیید",
+      "deny": "رد شد",
+      "executed": "اجرا شد",
+      "failed": "ناموفق"
+    }
+  },
+  "error": {
+    "generic": "مشکلی پیش آمد.",
+    "serviceUnavailable": "سرویس {{service}} در حال اجرا نیست.",
+    "todo": "هنوز پیاده‌سازی نشده است"
+  }
 }

@@ -1,0 +1,79 @@
+{
+  "title": "Voice",
+  "profile": "Voice profile",
+  "newProfile": "New profile",
+  "baseVoice": "Base voice",
+  "gender": {
+    "label": "Voice type",
+    "feminine": "Feminine",
+    "masculine": "Masculine",
+    "neutral": "Neutral"
+  },
+  "params": {
+    "pitch": "Pitch",
+    "pitchHint": "Raises or lowers the fundamental frequency.",
+    "speed": "Speed",
+    "speedHint": "Speaking rate multiplier.",
+    "energy": "Energy",
+    "energyHint": "Loudness and emphasis on stressed syllables.",
+    "softness": "Softness",
+    "softnessHint": "Breathiness and gentler consonant onsets.",
+    "warmth": "Warmth",
+    "warmthHint": "Rounder low-mid timbre, less sibilance.",
+    "deepness": "Deepness",
+    "deepnessHint": "Shifts formants down for a larger apparent voice.",
+    "maturity": "Maturity",
+    "maturityHint": "Youthful through to mature delivery.",
+    "cuteness": "Cuteness",
+    "cutenessHint": "Higher pitch, shorter phrases, rising intonation.",
+    "expressiveness": "Expressiveness",
+    "expressivenessHint": "Flat and even, through to animated pitch movement.",
+    "japaneseInfluence": "Japanese influence",
+    "japaneseInfluenceHint": "Japanese rhythm and vowel colour in other languages.",
+    "animeStyle": "Anime style",
+    "animeStyleHint": "Exaggerated emotion and sharper attack."
+  },
+  "unsupported": "The current provider does not support this parameter.",
+  "input": {
+    "title": "Microphone",
+    "enable": "Enable voice input",
+    "device": "Input device",
+    "vadThreshold": "Voice detection sensitivity",
+    "permissionNeeded": "Microphone access is required."
+  },
+  "output": {
+    "title": "Speech output",
+    "enable": "Speak replies aloud",
+    "device": "Output device"
+  },
+  "emotion": {
+    "label": "Emotion",
+    "neutral": "Neutral",
+    "happy": "Happy",
+    "sad": "Sad",
+    "angry": "Angry",
+    "surprised": "Surprised",
+    "relaxed": "Relaxed",
+    "thinking": "Thinking"
+  },
+  "personality": {
+    "title": "Personality",
+    "cute": "Cute",
+    "cuteHint": "Softer wording and gentler phrasing.",
+    "playful": "Playful",
+    "playfulHint": "More humour and teasing.",
+    "confident": "Confident",
+    "confidentHint": "Direct statements with less hedging.",
+    "verbose": "Detail",
+    "verboseHint": "Short answers through to full explanations.",
+    "warmth": "Warmth",
+    "warmthHint": "Acknowledges how you feel before answering.",
+    "initiative": "Initiative",
+    "initiativeHint": "How often it suggests the next action."
+  },
+  "preview": {
+    "button": "Preview voice",
+    "playing": "Playing…",
+    "sample": "Hello, I am {{name}}. How can I help you today?"
+  }
+}

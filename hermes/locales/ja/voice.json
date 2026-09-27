@@ -1,0 +1,79 @@
+{
+  "title": "ボイス",
+  "profile": "ボイスプロファイル",
+  "newProfile": "新しいプロファイル",
+  "baseVoice": "ベースボイス",
+  "gender": {
+    "label": "声の種類",
+    "feminine": "女性的",
+    "masculine": "男性的",
+    "neutral": "中性的"
+  },
+  "params": {
+    "pitch": "高さ",
+    "pitchHint": "声の基本周波数を上下させます。",
+    "speed": "速さ",
+    "speedHint": "話す速度の倍率です。",
+    "energy": "力強さ",
+    "energyHint": "音量と強調の付き方を変えます。",
+    "softness": "やわらかさ",
+    "softnessHint": "息づかいを増やし、子音の立ち上がりを穏やかにします。",
+    "warmth": "温かみ",
+    "warmthHint": "中低域を豊かにし、耳障りな響きを抑えます。",
+    "deepness": "深み",
+    "deepnessHint": "フォルマントを下げ、体格の大きい声にします。",
+    "maturity": "年齢感",
+    "maturityHint": "幼い声から落ち着いた大人の声まで調整します。",
+    "cuteness": "かわいさ",
+    "cutenessHint": "高めの声、短いフレーズ、語尾の上がる抑揚にします。",
+    "expressiveness": "表現力",
+    "expressivenessHint": "平坦な読み上げから抑揚豊かな話し方まで変えます。",
+    "japaneseInfluence": "日本語の影響",
+    "japaneseInfluenceHint": "他の言語を話すときに日本語のリズムと母音を加えます。",
+    "animeStyle": "アニメ風",
+    "animeStyleHint": "感情を誇張し、立ち上がりを鋭くします。"
+  },
+  "unsupported": "現在のプロバイダーはこの項目に対応していません。",
+  "input": {
+    "title": "マイク",
+    "enable": "音声入力を有効にする",
+    "device": "入力デバイス",
+    "vadThreshold": "音声検出の感度",
+    "permissionNeeded": "マイクへのアクセス許可が必要です。"
+  },
+  "output": {
+    "title": "音声出力",
+    "enable": "返答を読み上げる",
+    "device": "出力デバイス"
+  },
+  "emotion": {
+    "label": "感情",
+    "neutral": "ふつう",
+    "happy": "うれしい",
+    "sad": "かなしい",
+    "angry": "おこり",
+    "surprised": "おどろき",
+    "relaxed": "リラックス",
+    "thinking": "考え中"
+  },
+  "personality": {
+    "title": "性格",
+    "cute": "かわいさ",
+    "cuteHint": "やわらかい言い回しになります。",
+    "playful": "遊び心",
+    "playfulHint": "冗談や軽いからかいが増えます。",
+    "confident": "自信",
+    "confidentHint": "断定的に話し、あいまいな表現を減らします。",
+    "verbose": "詳しさ",
+    "verboseHint": "短い返答から丁寧な説明まで変わります。",
+    "warmth": "思いやり",
+    "warmthHint": "答える前に気持ちに寄り添います。",
+    "initiative": "積極性",
+    "initiativeHint": "次の行動をどれだけ提案するかを決めます。"
+  },
+  "preview": {
+    "button": "音声を試す",
+    "playing": "再生中…",
+    "sample": "こんにちは、{{name}} です。今日は何をお手伝いしましょうか。"
+  }
+}

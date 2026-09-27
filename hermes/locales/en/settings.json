@@ -1,0 +1,69 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "character": "Character",
+    "voice": "Voice",
+    "agent": "Agent",
+    "ai": "AI providers",
+    "privacy": "Privacy",
+    "joyai": "JoyAI",
+    "advanced": "Advanced"
+  },
+  "general": {
+    "uiLanguage": "Interface language",
+    "startOnLogin": "Start when I sign in",
+    "minimiseToTray": "Minimise to the system tray",
+    "alwaysOnTop": "Keep the companion on top",
+    "theme": "Theme",
+    "themeDark": "Dark",
+    "themeLight": "Light"
+  },
+  "agent": {
+    "permissionLevel": "Permission level",
+    "toolAllowlist": "Allowed tools",
+    "toolAllowlistHint": "Leave empty to allow everything the level permits.",
+    "toolDenylist": "Blocked tools",
+    "toolDenylistHint": "Always wins over the allowed list.",
+    "filesystemScopes": "Filesystem scopes",
+    "filesystemScopesHint": "File tools can only touch these folders. Empty means no file access.",
+    "addScope": "Add folder",
+    "confirmationTimeout": "Confirmation timeout",
+    "maxIterations": "Maximum steps per run"
+  },
+  "ai": {
+    "llmProvider": "Language model",
+    "visionProvider": "Vision model",
+    "sttProvider": "Speech to text",
+    "ttsProvider": "Text to speech",
+    "credentialRef": "Credential",
+    "credentialHint": "Keys are stored in the Windows Credential Manager, never in this file.",
+    "providerMock": "Mock (offline)",
+    "providerLocal": "Local model",
+    "providerOpenAI": "OpenAI"
+  },
+  "privacy": {
+    "allowCloudLlm": "Allow cloud language models",
+    "allowCloudVision": "Allow screenshots to leave this computer",
+    "allowCloudAudio": "Allow audio to leave this computer",
+    "retainAuditLog": "Keep the activity log for",
+    "days": "{{count}} days",
+    "telemetry": "Telemetry",
+    "telemetryOff": "Telemetry is permanently off.",
+    "localBadge": "On this computer",
+    "cloudBadge": "Sent to {{provider}}"
+  },
+  "joyai": {
+    "enabled": "Enable JoyAI video features",
+    "optional": "JoyAI is optional. HERMES runs fully without it.",
+    "endpoint": "JoyAI service address",
+    "status": "Service status",
+    "notInstalled": "Not installed"
+  },
+  "advanced": {
+    "developerMode": "Developer mode",
+    "serviceStatus": "Service status",
+    "openStorage": "Open the storage folder",
+    "diagnostics": "Diagnostics"
+  }
+}

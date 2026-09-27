@@ -1,16 +1,178 @@
 {
-  "app.name": "HERMES",
-  "nav.chat": "Chat",
-  "nav.agent": "Agent",
-  "nav.character": "Character",
-  "nav.voice": "Voice",
-  "nav.settings": "Settings",
-  "settings.language": "Language",
-  "language.english": "English",
-  "language.japanese": "日本語",
-  "language.persian": "فارسی",
-  "action.save": "Save",
-  "action.cancel": "Cancel",
-  "action.stop": "Stop",
-  "action.preview": "Preview"
+  "app": {
+    "name": "HERMES",
+    "tagline": "Local-first desktop companion"
+  },
+  "nav": {
+    "chat": "Chat",
+    "agent": "Agent",
+    "character": "Character",
+    "voice": "Voice",
+    "settings": "Settings",
+    "audit": "Activity log"
+  },
+  "mode": {
+    "companion": "Companion mode",
+    "expanded": "Expanded mode",
+    "toCompanion": "Shrink to companion",
+    "toExpanded": "Open full window"
+  },
+  "action": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "stop": "Stop",
+    "preview": "Preview",
+    "close": "Close",
+    "send": "Send",
+    "import": "Import",
+    "remove": "Remove",
+    "reset": "Reset",
+    "approve": "Approve",
+    "deny": "Deny",
+    "retry": "Retry",
+    "clear": "Clear"
+  },
+  "status": {
+    "idle": "Idle",
+    "listening": "Listening",
+    "thinking": "Thinking",
+    "speaking": "Speaking",
+    "working": "Working",
+    "stopped": "Stopped",
+    "error": "Error",
+    "connected": "Connected",
+    "disconnected": "Offline"
+  },
+  "emergency": {
+    "stop": "Emergency stop",
+    "stopShort": "STOP",
+    "engaged": "Emergency stop engaged. All tool execution is halted.",
+    "release": "Release stop",
+    "hint": "Cancels any running tool and blocks new ones"
+  },
+  "chat": {
+    "title": "Conversation",
+    "placeholder": "Message {{name}}…",
+    "empty": "No messages yet. Say hello.",
+    "you": "You",
+    "thinking": "{{name}} is thinking…",
+    "conversationLanguage": "Conversation language",
+    "micStart": "Start voice input",
+    "micStop": "Stop voice input"
+  },
+  "agent": {
+    "title": "Agent",
+    "activity": "Tool activity",
+    "noActivity": "No tool calls yet.",
+    "level": "Permission level",
+    "run": "Run",
+    "iterations": "Step {{current}} of {{max}}",
+    "provider": "Provider",
+    "mockNotice": "Running on the mock provider. Connect a real model in Settings → AI.",
+    "verifying": "Verifying result…"
+  },
+  "tools": {
+    "computer": {
+      "screenshot": "Take a screenshot",
+      "mouse_move": "Move the mouse",
+      "mouse_click": "Click the mouse",
+      "mouse_scroll": "Scroll",
+      "keyboard_type": "Type text",
+      "keyboard_press": "Press a key",
+      "hotkey": "Press a key combination"
+    },
+    "filesystem": {
+      "list": "List a folder",
+      "read": "Read a file",
+      "write": "Write a file",
+      "copy": "Copy a file",
+      "move": "Move a file",
+      "delete": "Delete a file"
+    },
+    "applications": {
+      "open": "Open an application",
+      "close": "Close a window",
+      "focus": "Focus a window",
+      "list_windows": "List open windows"
+    },
+    "shell": {
+      "cmd": "Run a CMD command",
+      "powershell": "Run a PowerShell script"
+    },
+    "system": {
+      "info": "Read system information",
+      "processes": "List processes"
+    }
+  },
+  "character": {
+    "title": "Character",
+    "active": "Active character",
+    "import": "Import a .vrm file",
+    "importing": "Loading model…",
+    "imported": "Loaded {{name}}",
+    "none": "No character imported yet",
+    "fallbackNotice": "Showing the built-in rig. Import a .vrm to use your own model.",
+    "replace": "Replace model",
+    "scale": "Scale",
+    "offsetX": "Horizontal offset",
+    "offsetY": "Vertical offset",
+    "author": "Author",
+    "license": "Licence",
+    "errors": {
+      "too_small": "That file is too small to be a VRM.",
+      "too_large": "That file is larger than the 200 MB limit.",
+      "not_glb": "That is not a glTF binary file.",
+      "unsupported_version": "Unsupported glTF version.",
+      "length_mismatch": "The file appears truncated or corrupt.",
+      "no_json_chunk": "The file is missing its glTF JSON chunk.",
+      "bad_json": "The model data could not be read.",
+      "not_vrm": "This glTF file has no VRM extension."
+    }
+  },
+  "idle": {
+    "title": "Idle animation",
+    "breathRate": "Breathing rate",
+    "breathDepth": "Breathing depth",
+    "sway": "Body sway",
+    "headFollow": "Head movement",
+    "blink": "Blinking",
+    "saccade": "Eye movement",
+    "intensity": "Overall intensity"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "japanese": "日本語",
+    "persian": "فارسی",
+    "ui": "Interface language",
+    "conversation": "Conversation language",
+    "independentHint": "The interface language and the language the agent speaks are separate."
+  },
+  "tray": {
+    "show": "Show HERMES",
+    "companion": "Companion mode",
+    "expanded": "Expanded mode",
+    "emergencyStop": "Emergency stop",
+    "quit": "Quit"
+  },
+  "audit": {
+    "title": "Activity log",
+    "empty": "Nothing logged yet.",
+    "time": "Time",
+    "tool": "Tool",
+    "risk": "Risk",
+    "outcome": "Outcome",
+    "outcomes": {
+      "allow": "Allowed",
+      "confirm": "Confirmation requested",
+      "deny": "Denied",
+      "executed": "Executed",
+      "failed": "Failed"
+    }
+  },
+  "error": {
+    "generic": "Something went wrong.",
+    "serviceUnavailable": "{{service}} service is not running.",
+    "todo": "Not implemented yet"
+  }
 }

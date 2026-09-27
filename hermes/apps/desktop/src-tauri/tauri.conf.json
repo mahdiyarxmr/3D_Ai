@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "HERMES",
+  "version": "0.1.0",
+  "identifier": "dev.hermes.companion",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost ws://127.0.0.1:* http://127.0.0.1:*",
+      "assetProtocol": { "enable": true, "scope": ["$APPDATA/characters/**"] }
+    },
+    "windows": [
+      {
+        "label": "companion",
+        "title": "HERMES",
+        "width": 380,
+        "height": 620,
+        "minWidth": 240,
+        "minHeight": 360,
+        "resizable": true,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "center": false,
+        "visible": true
+      },
+      {
+        "label": "expanded",
+        "title": "HERMES",
+        "width": 1180,
+        "height": 780,
+        "minWidth": 900,
+        "minHeight": 600,
+        "resizable": true,
+        "decorations": true,
+        "transparent": false,
+        "center": true,
+        "visible": false
+      }
+    ],
+    "trayIcon": {
+      "id": "hermes-tray",
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": false,
+      "tooltip": "HERMES"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi"],
+    "icon": ["icons/32x32.png", "icons/128x128.png"],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": true,
+        "languages": ["English", "Japanese", "Farsi"]
+      }
+    },
+    "shortDescription": "Local-first desktop AI companion",
+    "longDescription": "HERMES is a local-first desktop AI companion with a VRM avatar, voice interaction and permissioned computer use."
+  }
+}

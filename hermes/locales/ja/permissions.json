@@ -1,0 +1,75 @@
+{
+  "title": "権限",
+  "levels": {
+    "OBSERVE": "観察",
+    "ASSIST": "補助",
+    "AUTONOMOUS": "自律"
+  },
+  "levelDescriptions": {
+    "OBSERVE": "見るだけで操作はしません。スクリーンショット、ウィンドウやシステムの情報、許可したフォルダー内のファイルの読み取りができます。",
+    "ASSIST": "マウスとキーボードの操作、アプリの起動、コマンドの実行、ファイルの変更ができます。危険な操作は事前に確認します。",
+    "AUTONOMOUS": "許可されたツールを毎回確認せずに実行します。破壊的な操作やセキュリティに関わる操作は引き続き確認が必要です。"
+  },
+  "risk": {
+    "SAFE": "安全",
+    "LOW": "低",
+    "MEDIUM": "中",
+    "HIGH": "高",
+    "CRITICAL": "重大"
+  },
+  "request": {
+    "title": "許可が必要です",
+    "body": "{{name}} が {{tool}} を実行しようとしています。",
+    "riskLabel": "リスク",
+    "reasonLabel": "確認が必要な理由",
+    "argsLabel": "内容",
+    "approveOnce": "今回だけ許可",
+    "deny": "拒否",
+    "timeout": "この要求は回答がないまま期限切れになりました。",
+    "countdown": "残り {{seconds}} 秒"
+  },
+  "reasons": {
+    "unknown_tool": "そのツールは存在しません。",
+    "invalid_args": "ツールが求める引数と一致しませんでした。",
+    "level_forbids_capability": "現在の権限レベルではこの種の操作は許可されていません。",
+    "denylisted": "このツールは禁止リストに入っています。",
+    "not_allowlisted": "このツールは許可リストに入っていません。",
+    "outside_filesystem_scope": "許可されたフォルダーの外のパスです。",
+    "high_risk_requires_confirmation": "現在のレベルが自動で許可する範囲を超えています。",
+    "always_confirm": "この種の操作には必ず許可が必要です。",
+    "emergency_stop": "緊急停止が有効です。",
+    "blocked_category": "この操作は恒久的にブロックされています。",
+    "user_declined": "この要求を拒否しました。"
+  },
+  "categories": {
+    "destructive.delete": "データの削除",
+    "destructive.disk": "ディスクの破壊的操作",
+    "security.config": "セキュリティ設定の変更",
+    "security.firewall": "ファイアウォールの変更",
+    "security.accounts": "ユーザーアカウントの変更",
+    "security.antivirus": "セキュリティソフトの無効化",
+    "system.config": "システム設定の変更",
+    "system.boot": "起動設定の変更",
+    "system.power": "シャットダウンまたは再起動",
+    "persistence": "自動実行の仕組みの作成",
+    "credentials": "パスワードや鍵へのアクセス",
+    "remote.code": "ネットから取得したコードの実行",
+    "process.force_kill": "プログラムの強制終了"
+  },
+  "capabilities": {
+    "observe": "画面とシステムの観察",
+    "input": "マウスとキーボードの操作",
+    "fs.read": "ファイルの読み取り",
+    "fs.write": "ファイルの変更",
+    "fs.delete": "ファイルの削除",
+    "process": "アプリの起動と終了",
+    "shell": "シェルコマンドの実行",
+    "network": "ネットワークアクセス"
+  },
+  "scopes": {
+    "title": "エージェントが使えるフォルダー",
+    "empty": "許可されたフォルダーはありません。ファイル系ツールは無効です。",
+    "add": "フォルダーを許可",
+    "remove": "削除"
+  }
+}
