@@ -131,7 +131,7 @@ public sealed class PermissionManagerTests : IDisposable
     }
 
     [Fact]
-    public void Metadata_that_hides a capability_is_rejected_at_registration()
+    public void Metadata_that_hides_a_capability_is_rejected_at_registration()
     {
         // A tool that claims to be low risk while executing commands must never register.
         var inconsistent = new ToolDescriptor(
