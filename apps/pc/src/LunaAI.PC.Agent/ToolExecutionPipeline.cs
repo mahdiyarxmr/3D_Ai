@@ -186,7 +186,7 @@ public sealed class ToolExecutionPipeline
     }
 
     private void RecordDecision(string toolName, PermissionDecision decision, ToolInvocationContext context) =>
-        _auditLog.Record(AuditEvent.Decision(toolName, decision, context.Level));
+        _auditLog.Record(AuditEvent.PermissionDecided(toolName, decision, context.Level));
 
     private static string BuildSummary(ToolDescriptor descriptor, PermissionDecision decision) =>
         $"{descriptor.Name} ({descriptor.Risk}) — {decision.Reason}";

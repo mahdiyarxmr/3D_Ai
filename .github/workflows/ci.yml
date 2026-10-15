@@ -16,7 +16,14 @@ jobs:
         with:
           node-version: '20'
       - name: Product separation and localization guards
-        run: node --test "tests/*.test.mjs"
+        run: |
+          set -o pipefail
+          node --test "tests/*.test.mjs" 2>&1 | tee /tmp/repo-guards.log
+      - name: Annotate guard failures
+        if: failure()
+        run: |
+          bash tools/ci/annotate.sh /tmp/repo-guards.log repo-guards tail 50
+          exit 1
 
   web-backend:
     name: LunaAI Web backend
@@ -39,9 +46,7 @@ jobs:
       - name: Annotate test failures
         if: failure()
         run: |
-          grep -E "^not ok|error:|AssertionError" /tmp/web-backend-tests.log | head -30 | while IFS= read -r line; do
-            echo "::error title=web-backend::$line"
-          done
+          bash tools/ci/annotate.sh /tmp/web-backend-tests.log web-backend head 50
           exit 1
 
   web-frontend:
@@ -84,16 +89,17 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - name: Restore
-        run: dotnet restore LunaAI.PC.sln
+        run: dotnet restore LunaAI.PC.sln 2>&1 | tee /tmp/pc-restore.log
       - name: Build
         shell: pwsh
         run: |
           $log = dotnet build LunaAI.PC.sln --configuration Release --no-restore 2>&1 | Out-String
+          $log | Set-Content -Path $env:RUNNER_TEMP/pc-build.log
           $log | Write-Host
           if ($LASTEXITCODE -ne 0) {
-            ($log -split "`n" | Where-Object { $_ -match ': error ' } | Select-Object -First 40) | ForEach-Object {
-              Write-Host "::error title=pc-build::$($_.Trim())"
-            }
+            $errors = $log -split "`n" | Where-Object { $_ -match ': error ' } | Select-Object -First 45
+            if (-not $errors) { $errors = $log -split "`n" | Select-Object -Last 45 }
+            $errors | ForEach-Object { Write-Host "::error title=pc-build::$($_.Trim())" }
             exit 1
           }
       - name: Test

@@ -16,7 +16,7 @@ public sealed record AuditEvent(
     PermissionLevel Level,
     IReadOnlyDictionary<string, string> Details)
 {
-    public static AuditEvent Decision(
+    public static AuditEvent PermissionDecided(
         string toolName,
         PermissionDecision decision,
         PermissionLevel level,

@@ -20,7 +20,7 @@ public sealed class AuditLogTests : IDisposable
     public void Records_and_reads_back_events()
     {
         var log = new JsonlAuditLog(_path);
-        log.Record(AuditEvent.Decision(
+        log.Record(AuditEvent.PermissionDecided(
             "write_file",
             PermissionDecision.Deny("write_file", RiskLevel.High, "outside_approved_roots"),
             PermissionLevel.Assist));

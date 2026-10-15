@@ -7,4 +7,11 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LunaAI.PC.Core\LunaAI.PC.Core.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Storage\LunaAI.PC.Storage.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Security\LunaAI.PC.Security.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Computer\LunaAI.PC.Computer.csproj" />
+  </ItemGroup>
+
 </Project>
