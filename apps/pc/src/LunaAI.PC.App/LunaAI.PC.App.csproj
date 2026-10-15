@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>LunaAI.PC.App</RootNamespace>
+    <AssemblyName>LunaAI.PC</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <!-- Native system-tray support (NotifyIcon). The main UI is WPF; no web view is used.
+         The implicit usings of WinForms are removed so that WPF types (TextBox, ListBox,
+         Application, ...) stay unambiguous in this project. -->
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LunaAI.PC.Core\LunaAI.PC.Core.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Storage\LunaAI.PC.Storage.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Security\LunaAI.PC.Security.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Computer\LunaAI.PC.Computer.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Agent\LunaAI.PC.Agent.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Voice\LunaAI.PC.Voice.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\locales\en\pc.json" Link="locales\en\pc.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\..\locales\ja\pc.json" Link="locales\ja\pc.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\..\locales\fa\pc.json" Link="locales\fa\pc.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\..\locales\en\common.json" Link="locales\en\common.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\..\locales\ja\common.json" Link="locales\ja\common.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\..\locales\fa\common.json" Link="locales\fa\common.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

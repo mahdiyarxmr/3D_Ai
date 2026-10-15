@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>LunaAI.PC.Storage</RootNamespace>
+    <AssemblyName>LunaAI.PC.Storage</AssemblyName>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LunaAI.PC.Core\LunaAI.PC.Core.csproj" />
+  </ItemGroup>
+
+</Project>

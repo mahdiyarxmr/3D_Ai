@@ -1,0 +1,48 @@
+# --- Secrets / local configuration ---
+.env
+.env.*
+!.env.example
+*.local.json
+
+# --- Node / web ---
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- .NET / LunaAI PC ---
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+.vs/
+*.binlog
+TestResults/
+artifacts/
+publish/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# --- Local runtime data (LunaAI Web backend, LunaAI PC local store) ---
+apps/web/backend/data/
+*.db
+*.db-wal
+*.db-shm
+logs/
+*.log
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

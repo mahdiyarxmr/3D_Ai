@@ -1,0 +1,11 @@
+{
+  "invalid_input": "error.invalid_input",
+  "email_taken": "error.email_taken",
+  "invalid_credentials": "error.invalid_credentials",
+  "unauthorized": "error.unauthorized",
+  "invalid_token": "error.unauthorized",
+  "not_found": "error.not_found",
+  "rate_limited": "error.rate_limited",
+  "internal_error": "error.server",
+  "network": "error.network"
+}

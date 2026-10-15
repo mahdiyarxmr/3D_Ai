@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>LunaAI.PC.Computer</RootNamespace>
+    <AssemblyName>LunaAI.PC.Computer</AssemblyName>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Native GDI screen capture. Supported on Windows only; guarded by OperatingSystem.IsWindows(). -->
+    <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LunaAI.PC.Core\LunaAI.PC.Core.csproj" />
+    <ProjectReference Include="..\LunaAI.PC.Security\LunaAI.PC.Security.csproj" />
+  </ItemGroup>
+
+</Project>
