@@ -14,7 +14,7 @@ marked complete without an artefact to point at; the detailed inventory is in
 | Local settings and conversation history persist | Met | `LunaAI.PC.Storage`, tests in `ProviderAndStorageTests` and `AgentSessionTests`. |
 | The permission manager blocks unauthorized actions | Met | `PermissionManagerTests`, `ToolExecutionPipelineTests`, `AgentSessionTests`. |
 | The emergency stop prevents further computer actions | Met | `Emergency_stop_blocks_every_tool_including_low_risk_reads`, `Emergency_stop_blocks_all_tool_calls`, `Emergency_stop_prevents_execution_even_after_approval`. |
-| Tests cover permission enforcement and dangerous-operation denial | Met | 43 xUnit tests across permission, path, command, pipeline, session, catalogue, provider and storage suites. |
+| Tests cover permission enforcement and dangerous-operation denial | Met | 70 xUnit test cases (47 facts plus 23 theory cases) across permission, path, command, pipeline, session, catalogue, provider and storage suites. |
 
 ## LunaAI Web
 

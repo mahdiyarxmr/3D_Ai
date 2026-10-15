@@ -14,7 +14,7 @@ cd apps/web/backend && npm test
 # LunaAI Web frontend (17 tests): i18n, SSE parser, API client
 cd apps/web/frontend && npm test
 
-# LunaAI PC (Windows or Linux for the portable core)
+# LunaAI PC: 70 test cases on Windows, the same suite on Linux for the portable core
 cd apps/pc && dotnet test LunaAI.PC.sln -c Release
 ```
 
