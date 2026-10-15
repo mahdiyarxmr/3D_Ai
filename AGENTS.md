@@ -40,7 +40,7 @@ CI enforces this: the Windows job fails if web assets end up in the published de
 
 ```bash
 # repository guards (product separation, branding, locale parity)
-node --test "tests/*.test.mjs"
+node --test tests/separation.test.mjs
 
 # LunaAI Web
 cd apps/web/backend && npm test

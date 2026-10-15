@@ -88,7 +88,10 @@ describe('LunaAI Web / LunaAI PC separation', () => {
   });
 
   it('the shared contract package exposes no computer-control schema', () => {
-    const sharedFiles = readAll(path.join(repoRoot, 'packages/shared-contracts'));
+    // Prose may explain the rule (it names the forbidden capabilities); schemas
+    // and type definitions may not contain them.
+    const sharedFiles = readAll(path.join(repoRoot, 'packages/shared-contracts'))
+      .filter(({ file }) => !file.endsWith('.md'));
     for (const { file, content } of sharedFiles) {
       assert.ok(!/computer|shell|screenshot|mouse|keyboard/i.test(content), `${path.relative(repoRoot, file)} must stay non-privileged`);
     }

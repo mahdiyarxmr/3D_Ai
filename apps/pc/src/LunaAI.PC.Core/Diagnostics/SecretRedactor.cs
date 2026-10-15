@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace LunaAI.PC.Diagnostics;
+namespace LunaAI.PC.Core.Diagnostics;
 
 /// <summary>
 /// Removes secret-looking values before they can reach a log file or the audit log.

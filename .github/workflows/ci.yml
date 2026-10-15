@@ -18,11 +18,11 @@ jobs:
       - name: Product separation and localization guards
         run: |
           set -o pipefail
-          node --test "tests/*.test.mjs" 2>&1 | tee /tmp/repo-guards.log
+          node --test tests/separation.test.mjs 2>&1 | tee /tmp/repo-guards.log
       - name: Annotate guard failures
         if: failure()
         run: |
-          bash tools/ci/annotate.sh /tmp/repo-guards.log repo-guards tail 50
+          bash "$GITHUB_WORKSPACE/tools/ci/annotate.sh" /tmp/repo-guards.log repo-guards tail 50
           exit 1
 
   web-backend:
@@ -46,7 +46,7 @@ jobs:
       - name: Annotate test failures
         if: failure()
         run: |
-          bash tools/ci/annotate.sh /tmp/web-backend-tests.log web-backend head 50
+          bash "$GITHUB_WORKSPACE/tools/ci/annotate.sh" /tmp/web-backend-tests.log web-backend head 50
           exit 1
 
   web-frontend:

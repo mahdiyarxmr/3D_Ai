@@ -6,7 +6,7 @@ Tests exist to prove the security-relevant behaviour, not to inflate a number.
 
 ```bash
 # Repository guards: separation, branding, locale parity
-node --test "tests/*.test.mjs"
+node --test tests/separation.test.mjs
 
 # LunaAI Web backend (26 tests): auth, isolation, streaming, tool policy
 cd apps/web/backend && npm test

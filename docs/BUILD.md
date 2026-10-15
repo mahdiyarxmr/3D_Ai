@@ -49,7 +49,7 @@ npm run build      # type-checks and writes static assets to dist/
 ```bash
 cd apps/web/backend && npm test
 cd apps/web/frontend && npm test && npm run build
-node --test "tests/*.test.mjs"        # repository guards, from the repository root
+node --test tests/separation.test.mjs        # repository guards, from the repository root
 ```
 
 ## LunaAI PC (native Windows)

@@ -1,6 +1,6 @@
 using System.Text;
 using System.Text.Json;
-using LunaAI.PC.Diagnostics;
+using LunaAI.PC.Core.Diagnostics;
 using LunaAI.PC.Security.Permissions;
 
 namespace LunaAI.PC.Security.Audit;
