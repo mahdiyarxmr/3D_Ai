@@ -1,26 +1,18 @@
-# JoyAI Integration
+# Optional video/imaging subsystem integration
 
-JoyAI-Video-Edit is an optional visual/video subsystem.
+A separate, model-heavy video subsystem (referred to here as the optional video service) can be
+attached to LunaAI PC for tasks such as video transformation or webcam stylisation. It is optional
+and unimplemented today.
 
-Do NOT make the base HERMES application depend on JoyAI.
+Boundary rules for when it is built:
 
-Recommended architecture:
-
-HERMES
-  |
-  +--> JoyAI adapter
-          |
-          v
-      isolated service
-          |
-       FastAPI/WebSocket or equivalent
-          |
-       GPU/model runtime
-
-Potential future features:
-- video transformation
-- webcam effects
-- stylized video
-- desktop/video processing
-
-JoyAI should be independently installable because model/GPU requirements can be significantly larger than the base assistant.
+* The base application must run with the subsystem absent. No feature in the permission manager,
+  agent loop or UI may require it.
+* It lives behind an adapter with a process boundary, because its GPU and model requirements are much
+  larger than the base product's.
+* Its service endpoint is local-only, authenticated, and not exposed on any public interface. The
+  desktop application's rule of opening no listening port still applies to the base product, so any
+  listener belongs to the optional service and must be documented as such.
+* Requests that leave the computer (for example sending frames to a remote provider) are gated by the
+  privacy settings and disclosed in the UI.
+* Nothing in LunaAI Web may call it.

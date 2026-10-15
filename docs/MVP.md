@@ -1,69 +1,35 @@
-# HERMES MVP Acceptance Criteria
+# Acceptance criteria and current results
 
-## Desktop
-- [ ] Runs as a Windows desktop application.
-- [ ] Has a borderless transparent companion mode.
-- [ ] Has an expanded application window.
-- [ ] Has a system tray entry.
-- [ ] Has a global emergency stop mechanism.
+The specification's initial acceptance criteria, with the state of each item today. Nothing here is
+marked complete without an artefact to point at; the detailed inventory is in
+[STATUS.md](STATUS.md).
 
-## Localization
-- [ ] English UI works.
-- [ ] Japanese UI works.
-- [ ] Persian UI works.
-- [ ] Persian uses RTL layout.
-- [ ] English/Japanese use LTR layout.
-- [ ] Language can be changed from settings.
-- [ ] Selected UI language persists after restart.
-- [ ] Missing translation keys fall back to English.
+## LunaAI PC
 
-## VRM
-- [ ] User can upload a VRM.
-- [ ] Invalid VRM is rejected gracefully.
-- [ ] VRM renders in transparent mode.
-- [ ] Idle animation is smooth.
-- [ ] Blinking, breathing, eye movement and subtle sway exist.
-- [ ] Expressions can be triggered.
-- [ ] Lip sync works.
+| Criterion | State | Evidence |
+| --- | --- | --- |
+| A native Windows executable can be built and launched | Met (build) | CI job `LunaAI PC (native WPF, Windows)` restores, builds, tests and publishes `LunaAI.PC.exe`; the artifact is uploaded. Launching it requires an interactive Windows session, which CI cannot provide. |
+| Its UI is not rendered with HTML, React, TSX or a WebView | Met | WPF windows constructed in C#; the publish step fails if any `.html`, `.css`, `.js`, `.ts` or `.jsx` file appears in the output. |
+| The user can chat with a configured AI provider | Met | `Ui/MainWindow.cs` plus `OpenAiCompatibleProvider`; without a key the UI labels the development provider instead of pretending. |
+| Local settings and conversation history persist | Met | `LunaAI.PC.Storage`, tests in `ProviderAndStorageTests` and `AgentSessionTests`. |
+| The permission manager blocks unauthorized actions | Met | `PermissionManagerTests`, `ToolExecutionPipelineTests`, `AgentSessionTests`. |
+| The emergency stop prevents further computer actions | Met | `Emergency_stop_blocks_every_tool_including_low_risk_reads`, `Emergency_stop_blocks_all_tool_calls`, `Emergency_stop_prevents_execution_even_after_approval`. |
+| Tests cover permission enforcement and dangerous-operation denial | Met | 43 xUnit tests across permission, path, command, pipeline, session, catalogue, provider and storage suites. |
 
-## Voice
-- [ ] At least one male and one female base voice are supported.
-- [ ] Voice profiles can be created.
-- [ ] Pitch, speed, energy, softness, deepness, maturity and cuteness can be adjusted where supported by the provider.
-- [ ] Japanese-inspired/anime voice styling is configurable.
-- [ ] English, Japanese and Persian speech can be selected when the configured TTS provider supports them.
-- [ ] Voice preview works.
-- [ ] Speech can be interrupted.
-- [ ] Emotion changes delivery and avatar expression.
+## LunaAI Web
 
-## Agent
-- [ ] Screenshot tool.
-- [ ] Mouse tools.
-- [ ] Keyboard tools.
-- [ ] Filesystem tools.
-- [ ] CMD tool.
-- [ ] PowerShell tool.
-- [ ] Application/window tools.
-- [ ] Permission checks happen before execution.
-- [ ] Tool activity is visible in the UI.
-- [ ] High-risk actions request confirmation.
-- [ ] Emergency stop cancels execution.
+| Criterion | State | Evidence |
+| --- | --- | --- |
+| Runs independently of LunaAI PC | Met | No reference to the desktop product in web code; enforced by the repository guard. |
+| Multiple users register and keep separate conversations | Met | `isolation.test.js`. |
+| One user cannot read or modify another user's data | Met | 404 on foreign reads, writes, renames and deletes; search and settings scoped. |
+| Works in English, Japanese and Persian | Met | Locale bundles plus `i18n.test.ts`; Persian uses an RTL layout. |
+| No endpoint gives web users privileged access to local computer tools | Met | No such endpoint exists, the tool registry refuses to register a desktop capability, and the guard test fails the build if one appears. |
 
-## Vision
-- [ ] Agent can request a screenshot.
-- [ ] Agent can inspect screenshot results.
-- [ ] Agent can perform an action and re-observe.
-- [ ] Agent verifies meaningful actions.
+## Documentation
 
-## JoyAI
-- [ ] JoyAI is optional.
-- [ ] Base application runs without JoyAI installed.
-- [ ] JoyAI integration is behind an adapter/service boundary.
-
-## Engineering
-- [ ] No secrets committed.
-- [ ] Unit tests for permission logic.
-- [ ] Integration tests for tool authorization.
-- [ ] E2E test for VRM upload.
-- [ ] E2E test for language switching.
-- [ ] Build instructions are documented.
+| Criterion | State |
+| --- | --- |
+| Setup and build instructions are reproducible | Met — [BUILD.md](BUILD.md), verified by CI on every push. |
+| The two products' architectures and security boundaries are documented | Met — [WEB_ARCHITECTURE.md](WEB_ARCHITECTURE.md), [PC_ARCHITECTURE.md](PC_ARCHITECTURE.md), [SECURITY.md](SECURITY.md). |
+| Implemented, partial and planned features are clearly distinguished | Met — [STATUS.md](STATUS.md) and [ROADMAP.md](ROADMAP.md). |

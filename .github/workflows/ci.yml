@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '20'
       - name: Product separation and localization guards
-        run: node --test tests/
+        run: node --test "tests/*.test.mjs"
 
   web-backend:
     name: LunaAI Web backend
@@ -32,7 +32,17 @@ jobs:
           cache: npm
           cache-dependency-path: apps/web/backend/package-lock.json
       - run: npm ci
-      - run: npm test
+      - name: Tests
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee /tmp/web-backend-tests.log
+      - name: Annotate test failures
+        if: failure()
+        run: |
+          grep -E "^not ok|error:|AssertionError" /tmp/web-backend-tests.log | head -30 | while IFS= read -r line; do
+            echo "::error title=web-backend::$line"
+          done
+          exit 1
 
   web-frontend:
     name: LunaAI Web frontend
@@ -48,8 +58,19 @@ jobs:
           cache: npm
           cache-dependency-path: apps/web/frontend/package-lock.json
       - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Unit tests
+        run: npm test
+      - name: Type check and production build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/web-frontend-build.log
+      - name: Annotate build failures
+        if: failure()
+        run: |
+          grep -E "error TS|error during build|failed" /tmp/web-frontend-build.log | head -30 | while IFS= read -r line; do
+            echo "::error title=web-frontend::$line"
+          done
+          exit 1
 
   pc-windows:
     name: LunaAI PC (native WPF, Windows)
@@ -65,18 +86,49 @@ jobs:
       - name: Restore
         run: dotnet restore LunaAI.PC.sln
       - name: Build
-        run: dotnet build LunaAI.PC.sln --configuration Release --no-restore
+        shell: pwsh
+        run: |
+          $log = dotnet build LunaAI.PC.sln --configuration Release --no-restore 2>&1 | Out-String
+          $log | Write-Host
+          if ($LASTEXITCODE -ne 0) {
+            ($log -split "`n" | Where-Object { $_ -match ': error ' } | Select-Object -First 40) | ForEach-Object {
+              Write-Host "::error title=pc-build::$($_.Trim())"
+            }
+            exit 1
+          }
       - name: Test
-        run: dotnet test LunaAI.PC.sln --configuration Release --no-build --logger "console;verbosity=normal"
+        shell: pwsh
+        run: |
+          $log = dotnet test LunaAI.PC.sln --configuration Release --no-build --logger "console;verbosity=normal" 2>&1 | Out-String
+          $log | Write-Host
+          if ($LASTEXITCODE -ne 0) {
+            ($log -split "`n" | Where-Object { $_ -match 'Failed |error |Assert\.' } | Select-Object -First 40) | ForEach-Object {
+              Write-Host "::error title=pc-test::$($_.Trim())"
+            }
+            exit 1
+          }
       - name: Publish native executable
-        run: dotnet publish src/LunaAI.PC.App/LunaAI.PC.App.csproj --configuration Release --runtime win-x64 --self-contained false --output ./artifacts/pc
+        shell: pwsh
+        run: |
+          $log = dotnet publish src/LunaAI.PC.App/LunaAI.PC.App.csproj --configuration Release --runtime win-x64 --self-contained false --output ./artifacts/pc 2>&1 | Out-String
+          $log | Write-Host
+          if ($LASTEXITCODE -ne 0) {
+            ($log -split "`n" | Where-Object { $_ -match ': error ' } | Select-Object -First 40) | ForEach-Object {
+              Write-Host "::error title=pc-publish::$($_.Trim())"
+            }
+            exit 1
+          }
       - name: Verify the published output is a native executable
         shell: pwsh
         run: |
-          if (-not (Test-Path ./artifacts/pc/LunaAI.PC.exe)) { throw "LunaAI.PC.exe was not produced" }
+          $exe = Get-ChildItem ./artifacts/pc -Filter LunaAI.PC.exe -Recurse -ErrorAction SilentlyContinue
+          if (-not $exe) { Write-Host "::error title=pc-publish::LunaAI.PC.exe was not produced"; exit 1 }
           $forbidden = Get-ChildItem ./artifacts/pc -Recurse -Include *.html,*.css,*.ts,*.tsx,*.jsx -ErrorAction SilentlyContinue
-          if ($forbidden) { throw "Web assets found in the native desktop build: $($forbidden -join ', ')" }
-          Write-Host "LunaAI.PC.exe published successfully"
+          if ($forbidden) {
+            Write-Host "::error title=pc-publish::web assets found in the native desktop build: $($forbidden.Name -join ', ')"
+            exit 1
+          }
+          Write-Host "LunaAI.PC.exe published successfully: $($exe.FullName)"
       - uses: actions/upload-artifact@v4
         with:
           name: lunaai-pc-win-x64
@@ -94,12 +146,15 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Build portable projects
+      - name: Build and test the portable core
+        shell: bash
         run: |
-          dotnet build src/LunaAI.PC.Core/LunaAI.PC.Core.csproj --configuration Release
-          dotnet build src/LunaAI.PC.Security/LunaAI.PC.Security.csproj --configuration Release
-          dotnet build src/LunaAI.PC.Storage/LunaAI.PC.Storage.csproj --configuration Release
-          dotnet build src/LunaAI.PC.Computer/LunaAI.PC.Computer.csproj --configuration Release
-          dotnet build src/LunaAI.PC.Agent/LunaAI.PC.Agent.csproj --configuration Release
-      - name: Run security tests on Linux
-        run: dotnet test tests/LunaAI.PC.Tests/LunaAI.PC.Tests.csproj --configuration Release --logger "console;verbosity=normal"
+          set -o pipefail
+          log=$(dotnet test tests/LunaAI.PC.Tests/LunaAI.PC.Tests.csproj --configuration Release 2>&1) || {
+            echo "$log" | tail -200
+            echo "$log" | grep -E ": error |Failed " | head -40 | while IFS= read -r line; do
+              echo "::error title=pc-core-linux::$(echo "$line" | sed 's/%/%25/g')"
+            done
+            exit 1
+          }
+          echo "$log" | tail -40
