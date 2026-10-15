@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  repo-guards:
+    name: Repository guards (separation + locales)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Product separation and localization guards
+        run: node --test tests/
+
+  web-backend:
+    name: LunaAI Web backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: apps/web/backend/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  web-frontend:
+    name: LunaAI Web frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: apps/web/frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  pc-windows:
+    name: LunaAI PC (native WPF, Windows)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: apps/pc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore LunaAI.PC.sln
+      - name: Build
+        run: dotnet build LunaAI.PC.sln --configuration Release --no-restore
+      - name: Test
+        run: dotnet test LunaAI.PC.sln --configuration Release --no-build --logger "console;verbosity=normal"
+      - name: Publish native executable
+        run: dotnet publish src/LunaAI.PC.App/LunaAI.PC.App.csproj --configuration Release --runtime win-x64 --self-contained false --output ./artifacts/pc
+      - name: Verify the published output is a native executable
+        shell: pwsh
+        run: |
+          if (-not (Test-Path ./artifacts/pc/LunaAI.PC.exe)) { throw "LunaAI.PC.exe was not produced" }
+          $forbidden = Get-ChildItem ./artifacts/pc -Recurse -Include *.html,*.css,*.ts,*.tsx,*.jsx -ErrorAction SilentlyContinue
+          if ($forbidden) { throw "Web assets found in the native desktop build: $($forbidden -join ', ')" }
+          Write-Host "LunaAI.PC.exe published successfully"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lunaai-pc-win-x64
+          path: apps/pc/artifacts/pc
+          if-no-files-found: error
+
+  pc-core-linux:
+    name: LunaAI PC core (portable, Linux)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/pc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build portable projects
+        run: |
+          dotnet build src/LunaAI.PC.Core/LunaAI.PC.Core.csproj --configuration Release
+          dotnet build src/LunaAI.PC.Security/LunaAI.PC.Security.csproj --configuration Release
+          dotnet build src/LunaAI.PC.Storage/LunaAI.PC.Storage.csproj --configuration Release
+          dotnet build src/LunaAI.PC.Computer/LunaAI.PC.Computer.csproj --configuration Release
+          dotnet build src/LunaAI.PC.Agent/LunaAI.PC.Agent.csproj --configuration Release
+      - name: Run security tests on Linux
+        run: dotnet test tests/LunaAI.PC.Tests/LunaAI.PC.Tests.csproj --configuration Release --logger "console;verbosity=normal"

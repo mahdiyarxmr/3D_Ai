@@ -1,35 +1,43 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-insecure-secret-change-me';
-const JWT_EXPIRES = '7d';
+const BCRYPT_ROUNDS = 12;
 
 export async function hashPassword(password) {
-  return bcrypt.hash(password, 12);
+  return bcrypt.hash(password, BCRYPT_ROUNDS);
 }
 
-export async function verifyPassword(password, hash) {
-  return bcrypt.compare(password, hash);
+export async function verifyPassword(password, passwordHash) {
+  return bcrypt.compare(password, passwordHash);
 }
 
-export function signToken(user) {
-  return jwt.sign({ sub: user.id, email: user.email }, JWT_SECRET, { expiresIn: JWT_EXPIRES });
+export function signToken(user, { secret, expiresIn = '7d' }) {
+  return jwt.sign({ sub: String(user.id), email: user.email }, secret, { expiresIn });
 }
 
-export function verifyToken(token) {
+export function verifyToken(token, { secret }) {
   try {
-    return jwt.verify(token, JWT_SECRET);
+    const payload = jwt.verify(token, secret);
+    const userId = Number(payload.sub);
+    if (!Number.isInteger(userId) || userId <= 0) return null;
+    return { userId, email: payload.email };
   } catch {
     return null;
   }
 }
 
-export function authMiddleware(req, res, next) {
-  const header = req.headers.authorization || '';
-  const token = header.startsWith('Bearer ') ? header.slice(7) : null;
-  if (!token) return res.status(401).json({ error: 'unauthorized' });
-  const payload = verifyToken(token);
-  if (!payload) return res.status(401).json({ error: 'invalid_token' });
-  req.userId = payload.sub;
-  next();
+/**
+ * Express middleware: requires a valid bearer token and sets req.userId.
+ * User identity always comes from the signed token, never from the request body.
+ */
+export function requireAuth({ secret }) {
+  return (req, res, next) => {
+    const header = req.headers.authorization || '';
+    const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+    if (!token) return res.status(401).json({ error: 'unauthorized' });
+    const payload = verifyToken(token, { secret });
+    if (!payload) return res.status(401).json({ error: 'invalid_token' });
+    req.userId = payload.userId;
+    return next();
+  };
 }
