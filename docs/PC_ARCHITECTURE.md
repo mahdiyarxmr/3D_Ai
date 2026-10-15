@@ -108,6 +108,15 @@ development provider is in use.
 `SendScreenshotsToProvider` defaults to false. Today `capture_screen` stores the image locally and
 returns metadata; forwarding image bytes to a model is a planned feature (see `docs/STATUS.md`).
 
+## Window, tray and safety controls
+
+The main window is a native WPF window (chat, activity, audit, settings). A notification-area icon
+(`NotifyIcon`) provides show/hide, emergency stop, resume and exit, and the window hides to the tray
+on minimise when that setting is enabled. The emergency stop is also bound to a system-wide hotkey
+(`Ctrl+Alt+Shift+S`, registered with `RegisterHotKey`), so actions can be stopped while another
+application has focus — the hotkey handler engages the stop, cancels the running turn and updates the
+window and audit log.
+
 ## Platform limitations (stated honestly)
 
 * The application targets Windows (`net8.0-windows`). On other systems the core builds and its tests
@@ -116,5 +125,8 @@ returns metadata; forwarding image bytes to a model is a planned feature (see `d
   interpreters are deliberately not on the allow list, so shell pipelines are not supported.
 * Voice output and the VRM companion are not implemented yet; the UI disables the controls and shows
   the reason instead of pretending to work.
+* Automated tests run against the portable core and the capability interfaces with fakes. Rendering a
+  real window, the tray icon and the global hotkey require an interactive Windows session and are
+  verified manually.
 * The application is published as framework-dependent (`dotnet publish -r win-x64`) today; a
   self-contained or MSIX installer is planned.

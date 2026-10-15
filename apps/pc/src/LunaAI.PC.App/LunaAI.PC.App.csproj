@@ -6,11 +6,18 @@
     <RootNamespace>LunaAI.PC.App</RootNamespace>
     <AssemblyName>LunaAI.PC</AssemblyName>
     <UseWPF>true</UseWPF>
-    <!-- Native system-tray support (NotifyIcon). The main UI is WPF; no web view is used. -->
+    <!-- Native system-tray support (NotifyIcon). The main UI is WPF; no web view is used.
+         The implicit usings of WinForms are removed so that WPF types (TextBox, ListBox,
+         Application, ...) stay unambiguous in this project. -->
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LunaAI.PC.Core\LunaAI.PC.Core.csproj" />

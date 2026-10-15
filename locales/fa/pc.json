@@ -33,5 +33,9 @@
   "pc.task.running": "در حال اجرا",
   "pc.task.completed": "تکمیل‌شده",
   "pc.task.failed": "ناموفق",
-  "pc.task.cancelled": "لغو شده"
+  "pc.task.cancelled": "لغو شده",
+  "pc.tray.show": "نمایش LunaAI PC",
+  "pc.tray.exit": "خروج از LunaAI PC",
+  "pc.emergencyStop.resume": "ازسرگیری کارها",
+  "pc.hotkey.hint": "کلیدهای Ctrl+Alt+Shift+S همه کارهای رایانه‌ای را متوقف می‌کنند"
 }

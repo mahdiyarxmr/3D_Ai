@@ -48,6 +48,7 @@ public sealed class MainWindow : Window, IDisposable
 
         _host.ActivityPublished += OnActivityPublished;
         Loaded += OnLoaded;
+        StateChanged += OnStateChanged;
     }
 
     private UIElement BuildLayout()
@@ -179,6 +180,14 @@ public sealed class MainWindow : Window, IDisposable
         return grid;
     }
 
+    private void OnStateChanged(object? sender, EventArgs e)
+    {
+        if (WindowState == WindowState.Minimized && _host.Settings.MinimizeToTray)
+        {
+            Hide();
+        }
+    }
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         RefreshConversations();
@@ -303,12 +312,20 @@ public sealed class MainWindow : Window, IDisposable
         RefreshAudit();
     }
 
+    /// <summary>Called when the global hotkey engages the emergency stop.</summary>
+    public void NotifyEmergencyStop()
+    {
+        UpdateStatus();
+        RefreshAudit();
+        AppendTranscript("LunaAI", _localization.T("pc.emergencyStop.engaged"));
+    }
+
     private void UpdateStatus()
     {
         var stopped = _host.PermissionManager.EmergencyStop.IsEngaged;
         _status.Text = stopped
             ? _localization.T("pc.emergencyStop.engaged")
-            : $"{_localization.T("pc.permission.level." + _host.PermissionManager.Level.ToString().ToLowerInvariant())}";
+            : $"{_localization.T("pc.permission.level." + _host.PermissionManager.Level.ToString().ToLowerInvariant())} · {_localization.T("pc.hotkey.hint")}";
         _status.Foreground = stopped ? Brushes.Firebrick : Brushes.Black;
         _emergencyStop.Content = stopped
             ? _localization.T("pc.emergencyStop") + " ✓"
@@ -376,6 +393,7 @@ public sealed class MainWindow : Window, IDisposable
     public void Dispose()
     {
         _host.ActivityPublished -= OnActivityPublished;
+        StateChanged -= OnStateChanged;
         _turnCancellation?.Dispose();
     }
 }

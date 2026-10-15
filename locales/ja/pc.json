@@ -33,5 +33,9 @@
   "pc.task.running": "実行中",
   "pc.task.completed": "完了",
   "pc.task.failed": "失敗",
-  "pc.task.cancelled": "キャンセル"
+  "pc.task.cancelled": "キャンセル",
+  "pc.tray.show": "LunaAI PC を表示",
+  "pc.tray.exit": "LunaAI PC を終了",
+  "pc.emergencyStop.resume": "操作を再開",
+  "pc.hotkey.hint": "Ctrl+Alt+Shift+S ですべての操作を停止します"
 }

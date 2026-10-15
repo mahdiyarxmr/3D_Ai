@@ -38,7 +38,8 @@ Honest inventory of what exists today. Anything not listed as implemented is not
 | Audit log, approval dialogs, emergency stop | Implemented | `Audit/JsonlAuditLog.cs`, `Ui/ApprovalDialog.cs`, `EmergencyStop` |
 | Controlled pipeline observe→plan→approve→execute→audit→verify | Implemented | `ToolExecutionPipeline`, `AgentSession` |
 | Tests for denied operations and escalation attempts | Implemented | `tests/LunaAI.PC.Tests` |
-| System tray entry and global emergency stop shortcut | Partial | tray/global-hotkey wiring is not implemented yet; the emergency stop button exists in the window |
+| System tray entry | Implemented | `Ui/TrayIcon.cs` shows, hides and exits the app and exposes the emergency stop and resume actions |
+| Global emergency stop shortcut (Ctrl+Alt+Shift+S) | Implemented | `Ui/EmergencyStopHotkey.cs` registers a system-wide hotkey with `RegisterHotKey` |
 | Voice input and speech output | Planned | interfaces exist; `UnavailableSpeechSynthesizer` reports the gap |
 | VRM character companion | Planned | see `docs/CHARACTER.md` |
 | Visual understanding (model receives screenshots) | Planned | local capture works, image forwarding is not wired |
