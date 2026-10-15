@@ -1,5 +1,7 @@
 # LunaAI
 
+[![CI](https://github.com/mahdiyarxmr/3D_Ai/actions/workflows/ci.yml/badge.svg)](https://github.com/mahdiyarxmr/3D_Ai/actions/workflows/ci.yml)
+
 LunaAI is two separate products that share one brand, one design language and one localization vocabulary.
 
 | Product | What it is | Where it runs | Repository location |
@@ -69,6 +71,24 @@ Nothing in this repository claims to be finished before it is.
 | LunaAI PC: permission manager, path/command guards, audit log, emergency stop | Implemented, tested |
 | LunaAI PC: observe/plan/approve/execute pipeline with typed tools | Implemented, tested |
 | LunaAI PC: voice output, VRM companion, visual model understanding | Planned |
+
+## Verification
+
+Every push runs five CI jobs; all of them must pass:
+
+| Job | What it proves |
+| --- | --- |
+| Repository guards | The products stay separate, branding is consistent, and every locale defines every key. |
+| LunaAI Web backend | Accounts, isolation, streaming chat and the server-side tool policy pass their tests. |
+| LunaAI Web frontend | i18n (en/ja/fa), the SSE parser and the API client pass, and the production bundle builds with a clean type check. |
+| LunaAI PC (Windows) | The native WPF solution restores, builds, passes its xUnit suite, publishes `LunaAI.PC.exe`, and the published output contains no web assets. |
+| LunaAI PC core (Linux) | The permission manager, guards, audit log, pipeline and agent loop build and pass their tests on a non-Windows runner. |
+
+The Windows job uploads the published executable as the `lunaai-pc-win-x64` artifact.
+
+Manual-only verification (stated so it is not mistaken for automated coverage): running the desktop
+window on an interactive Windows session, the tray icon, the global emergency-stop hotkey, and the
+screen-capture/input tools against a real desktop.
 
 ## Documentation
 
