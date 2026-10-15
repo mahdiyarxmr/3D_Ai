@@ -120,7 +120,7 @@ public sealed class ToolCatalogTests : IDisposable
             settingsAccessor: () => _settings);
 
         var context = new ToolInvocationContext { ConversationId = "c1", WorkspacePath = _root, Level = PermissionLevel.Autonomous };
-        var arguments = JsonDocument.Parse("{\"executable\": \"dotnet\", \"arguments\": \"build && rm -rf /\"}").RootElement;
+        var arguments = JsonDocument.Parse("{\"executable\": \"dotnet\", \"arguments\": \"build && echo hello\"}").RootElement;
 
         var result = await pipeline.ExecuteAsync("run_command", arguments, context, CancellationToken.None);
 

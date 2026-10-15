@@ -46,7 +46,8 @@ jobs:
       - name: Annotate test failures
         if: failure()
         run: |
-          bash "$GITHUB_WORKSPACE/tools/ci/annotate.sh" /tmp/web-backend-tests.log web-backend head 45 'Error|error:|expected:|actual:|not ok|ERR_|Cannot'
+          bash "$GITHUB_WORKSPACE/tools/ci/annotate.sh" /tmp/web-backend-tests.log web-backend-head head 25
+          bash "$GITHUB_WORKSPACE/tools/ci/annotate.sh" /tmp/web-backend-tests.log web-backend-error head 45 'Error|error:|expected:|actual:|not ok|ERR_|Cannot'
           exit 1
 
   web-frontend:

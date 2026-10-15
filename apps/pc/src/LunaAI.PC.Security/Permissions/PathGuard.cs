@@ -145,27 +145,51 @@ public sealed class PathGuard
         return false;
     }
 
+    /// <summary>
+    /// Walks the path from the root downwards and resolves symbolic links or
+    /// junctions at every level, so a link *inside* an approved root cannot point
+    /// to a location outside it.
+    /// </summary>
     private static string? ResolveExistingLinks(string path)
     {
         try
         {
-            var info = new FileInfo(path);
-            if (info.Exists)
+            var full = Path.GetFullPath(path);
+            var root = Path.GetPathRoot(full);
+            if (string.IsNullOrEmpty(root))
             {
-                var target = info.ResolveLinkTarget(returnFinalTarget: true);
-                return target?.FullName ?? info.FullName;
+                return full;
             }
 
-            var directory = new DirectoryInfo(path);
-            if (directory.Exists)
+            var current = root;
+            var relative = full[root.Length..];
+            foreach (var segment in relative.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                var target = directory.ResolveLinkTarget(returnFinalTarget: true);
-                return target?.FullName ?? directory.FullName;
+                var next = Path.Combine(current, segment);
+
+                var directory = new DirectoryInfo(next);
+                if (directory.Exists)
+                {
+                    var target = directory.LinkTarget is not null ? directory.ResolveLinkTarget(returnFinalTarget: true) : null;
+                    current = target?.FullName ?? directory.FullName;
+                    continue;
+                }
+
+                var file = new FileInfo(next);
+                if (file.Exists)
+                {
+                    var target = file.LinkTarget is not null ? file.ResolveLinkTarget(returnFinalTarget: true) : null;
+                    current = target?.FullName ?? file.FullName;
+                    continue;
+                }
+
+                // Component does not exist yet (a write target): keep the literal path.
+                current = next;
             }
 
-            return path;
+            return current;
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or NotSupportedException)
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
         {
             return null;
         }

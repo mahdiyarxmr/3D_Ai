@@ -151,14 +151,14 @@ public sealed class ToolExecutionPipeline
         {
             _auditLog.Record(AuditEvent.Execution(descriptor.Name, false, "timeout", context.Level));
             _events.Publish(new AgentEvent(AgentEventKind.ToolFailed, "tool_timeout", descriptor.Name));
-            return new ToolExecutionResult(false, false, string.Empty, decision);
+            return new ToolExecutionResult(true, false, string.Empty, decision);
         }
         catch (Exception exception)
         {
             _logger.Error("tool.failed", exception, new Dictionary<string, string> { ["tool"] = descriptor.Name });
             _auditLog.Record(AuditEvent.Execution(descriptor.Name, false, exception.GetType().Name, context.Level));
             _events.Publish(new AgentEvent(AgentEventKind.ToolFailed, exception.GetType().Name, descriptor.Name));
-            return new ToolExecutionResult(false, false, string.Empty, decision);
+            return new ToolExecutionResult(true, false, string.Empty, decision);
         }
     }
 

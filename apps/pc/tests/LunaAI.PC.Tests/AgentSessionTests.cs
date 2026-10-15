@@ -47,7 +47,7 @@ public sealed class AgentSessionTests : IDisposable
         return new AgentSession(provider, _registry, pipeline, _conversations, _auditLog, () => _settings);
     }
 
-    private Conversation CreateConversation() => _conversations.Create("Test conversation", _root);
+    private Conversation CreateConversation() => _conversations.Create("New conversation", _root);
 
     [Fact]
     public async Task Denied_tool_calls_are_reported_to_the_model_and_never_executed()

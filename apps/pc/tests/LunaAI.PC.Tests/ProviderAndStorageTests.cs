@@ -144,7 +144,7 @@ public sealed class StorageTests : IDisposable
     {
         var path = Path.Combine(_directory, "conversations.json");
         var store = new JsonConversationStore(path);
-        var conversation = store.Create("First", _directory);
+        var conversation = store.Create("New conversation", _directory);
         store.AddMessage(conversation.Id, ChatMessage.User("hello"));
 
         var reloaded = new JsonConversationStore(path).Find(conversation.Id);
